@@ -1,82 +1,25 @@
 import { React, useState } from 'react'
-
-import img from '../kids.png'
+import Worksheets from './Worksheets.json'
+import img from '../Assets/img.jpg'
+import { Link, withRouter } from 'react-router-dom'
 function List(props) {
-    const data = [{
-        "id": 1,
-        "name": "Decimal Operations",
-        "author": "Jane Cooper",
-        "subject": "Mathematics",
-        "grade": "5th Grade"
-    }, {
-        "id": 2,
-        "name": "work",
-        "author": "Alua",
-        "subject": "Mathematics",
-        "grade": "5th Grade"
-    }, {
-        "id": 3,
-        "name": "Calculus 1",
-        "author": "Einstein",
-        "subject": "Mathematics",
-        "grade": "11th Grade"
-    }, {
-        "id": 4,
-        "name": "Bohemian Rhapsody",
-        "author": "Freddy Mercury",
-        "subject": "Music",
-        "grade": "9th Grade"
-    }, {
-        "id": 5,
-        "name": "Atlas",
-        "author": "Columbus",
-        "subject": "Geography",
-        "grade": "6th Grade"
-    }, {
-        "id": 6,
-        "name": "Decimal Operations",
-        "author": "Jane Cooper",
-        "subject": "Mathematics",
-        "grade": "5th Grade"
-    }, {
-        "id": 7,
-        "name": "Decimal Operations",
-        "author": "Jane Cooper",
-        "subject": "Mathematics",
-        "grade": "5th Grade"
-    }, {
-        "id": 8,
-        "name": "Decimal Operations",
-        "author": "Jane Cooper",
-        "subject": "Mathematics",
-        "grade": "5th Grade"
-    }, {
-        "id": 9,
-        "name": "Decimal Operations",
-        "author": "Jane Cooper",
-        "subject": "Mathematics",
-        "grade": "5th Grade"
-    }, {
-        "id": 10,
-        "name": "Decimal Operations",
-        "author": "Jane Cooper",
-        "subject": "Mathematics",
-        "grade": "5th Grade"
-    }] 
+
+    const data = Worksheets
+    
     const cardStyle = {
-        marginTop: '30px',
-        marginLeft: '35%',
+        marginBottom: '40px',
+        
         display: 'flex', 
-        flexWrap: 'wrap',
-        width: '800px',
+        color: 'black',
+        width: '700px',
         height: '262px',
-        margin: '30px',
-        border: '0.5px solid #000', // You can customize the border color
+        
+        border: '0.5px solid #b2bac8', // You can customize the border color
         borderRadius: '8px', // Adjust the border radius as needed
         padding: '30px 40px', // Padding values (top, right, bottom, left)
         boxSizing: 'border-box',
-        justifyContent: 'space-between',
-        gap: '30px', // Gap between child elements
+        
+        gap: '40px', // Gap between child elements
         
       };
       const buttonStyle = {
@@ -84,12 +27,13 @@ function List(props) {
         height: '44px',
         padding: '8px 16px', // Adjust the padding as needed
         margin: '5px', // Gap between elements
-        backgroundColor: '#23A6F0', // Set the background color to your preference
+        backgroundColor: 'green', // Set the background color to your preference
         color: '#fff', // Set the text color to your preference
         border: '1px solid #0073e6', // Customize the border color if desired
         borderRadius: '4px', // Adjust the border radius as needed
         cursor: 'pointer', // Add a pointer cursor for interaction
-        marginBottom: '68px'
+        marginBottom: '80px',
+        marginRight: '-5px'
       };
       const buttonStyle1 = {
         width: '77px',
@@ -101,30 +45,25 @@ function List(props) {
         border: '1px solid #0073e6', // Customize the border color if desired
         borderRadius: '4px', // Adjust the border radius as needed
         cursor: 'pointer', // Add a pointer cursor for interaction
+        marginRight: '-5px',
+        marginBottom: '-5px'
       };
     //create a new array by filtering the original array
-    const filteredData = data.filter((el) => {
-        //if no input the return the original
-        if (props.input === '') {
-            return el;
-        }
-        //return the item which contains the user input
-        else {
-            return el.name.toLowerCase().includes(props.input)
-        }
-    })
+
     return (
-        <div style={{marginTop: "50px"}}>
-            {filteredData.map((item) => (
+        <div style={{}}>
+            {data.map((item) => (
                 <div style={cardStyle} >
-                    <div><img  src={img} alt="img"/></div>
+                    <div style={{width: '350px'}}><img  src={img} alt="img" style={{width: "100%", height:"100%", borderRadius:"3%"}}/>
+                </div>
                 <div>
-                <h3 key={item.id}>{item.name}</h3>
-                <p key={item.id}>By {item.author} in {item.subject}, {item.grade}</p>
-                <p>15 Downloads</p>
+                    <h3 key={item.id}><Link to={`/worksheets/${item.id}`}>{item.name}</Link></h3>
+                    <p key={item.id}>By <Link to={`/authors/${item.id}`}>{item.author}</Link> in <Link to={`/category/${item.subject}`}>{item.subject}</Link>, {item.grade}</p>
+                    <p>15 Downloads</p>
                 </div>
                 <div>
                     <div><button style={buttonStyle}>Free</button></div>
+                    <div ><Link to={`/worksheets/${item.id}`}><button style={buttonStyle1}> View </button></Link></div>
                 </div>
                 </div>
             ))}

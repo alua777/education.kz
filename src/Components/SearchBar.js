@@ -1,32 +1,26 @@
-import { React, useState } from "react";
-import TextField from "@mui/material/TextField";
-import List from "./List"
-import "./SearchBar.css";
+import React from 'react';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
+const SearchBar = () => {
+  const handleSearch = () => {
+    // Perform search operation here
+    console.log('Search button clicked');
+    // For demonstration purposes, I'm just logging a message
+  };
 
-function SearchBar() {
-    const [inputText, setInputText] = useState("");
-    let inputHandler = (e) => {
-      //convert input text to lower case
-      var lowerCase = e.target.value.toLowerCase();
-      setInputText(lowerCase);
-    };
-  
-    return (
-      <div className="main">
-        <h1>Library Worksheets, Lesson Plans, etc.</h1>
-        <div className="search">
-          <TextField
-            id="outlined-basic"
-            onChange={inputHandler}
-            variant="outlined"
-            fullWidth
-            label="Search"
-          />
-        </div>
-        <List input={inputText} />
-      </div>
-    );
-}
+  return (
+    <div style={{ display: 'flex', justifyContent:'space-around'}}>
+      <TextField
+        label="Search"
+        variant="outlined"
+        
+        onInput={handleSearch}
+        style={{ width:"90%", marginRight: '10px' }}
+      />
+      
+    </div>
+  );
+};
 
 export default SearchBar;
