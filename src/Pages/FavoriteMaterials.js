@@ -1,8 +1,8 @@
-
+import Card from '../Components/Card';
 import Filter from '../Components/Filter';
-import List from '../Components/List';
+import FavoritesList from '../Components/FavoritesList';
 
-function Home() {
+function FavoriteMaterials() {
   return (
     <div>
       <div>
@@ -12,12 +12,12 @@ function Home() {
         <div>
           <Filter/>
         </div>
-        <div style={{ marginTop: '50px' }}>
-          <List/>
+        <div style={{ marginTop: '20px' }}>
+          <FavoritesList/>
         </div>
       </div>
     </div>
   );
 }
 
-export default Home;
+export default FavoriteMaterials;

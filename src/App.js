@@ -2,17 +2,15 @@ import './Components/Header'
 import './App.css';
 import { BrowserRouter as Router, Route, Routes, createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Header from './Components/Header';
-import SearchBar from './Components/SearchBar';
-import List from './Components/List'
 import Greenlight from './Pages/Greenlight';
 import Home from './Pages/Home';
-import Account from './Pages/Account';
-import Biology from './Pages/Category/Biology';
-import Chemistry from './Pages/Category/Chemistry';
-import Physics from './Pages/Category/Physics';
-import History from './Pages/Category/History';
-import Worksheet from './Pages/Worksheet'
-import Author from './Pages/Author';
+import Request from './Pages/Request'
+import Material from './Pages/Material'
+import MyMaterial from './Pages/MyMaterial'
+import Chat  from './Pages/Chat';
+import RequestDetails from './Pages/RequestDetails';
+import FavoriteMaterials from './Pages/FavoriteMaterials';
+import Rejects from './Pages/Rejects';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -23,33 +21,35 @@ const router = createBrowserRouter([
     element: <Greenlight/>
   },
   {
-    path: '/Account',
-    element: <Account/>
+    path: '/rejects',
+    element: <Rejects/>
+  },
+  
+  {
+    path: `/material/:value`,
+    element: <Material/>
   },
   {
-    path: '/category/biology',
-    element: <Biology/>
+    path: '/request',
+    element: <Request/>
   },
   {
-    path: '/category/chemistry',
-    element: <Chemistry/>
+    path: '/chat',
+    element: <Chat/>
   },
   {
-    path: '/category/physics',
-    element: <Physics/>
+    path: `/request/:value`,
+    element: <RequestDetails/>
   },
   {
-    path: '/category/history',
-    element: <History/>
-  },
+    path: 'mymaterials',
+    element: <MyMaterial/>
+  }, 
   {
-    path: '/worksheets/:value',
-    element: <Worksheet/>
-  },
-  {
-    path: 'authors/:value',
-    element: <Author/>
-  },
+    path: '/favorites',
+    element: <FavoriteMaterials/>
+  }
+
 
 ])
 function App() {

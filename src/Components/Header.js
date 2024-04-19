@@ -11,21 +11,24 @@ import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import './Header.css';
+import { MarginRounded } from '@mui/icons-material';
+import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 
-const pages1 = ['Home',, 'Greenlight', 'Account', 'Contact'];
+const pages1 = ['Home',, 'Greenlight', 'Request', 'Chat', 'Favorites', 'My materials', 'Rejects'];
 const pages2 = ['Login', 'Become a member'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-function ResponsiveAppBar() {
+function Header() {
   const [showLoginForm, setShowLoginForm] = useState(false);
   const [showRegistrationForm, setShowRegistrationForm] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
+  const languages = ['Russian', 'English', 'Kazakh'];
+  const [selectedLanguage, setSelectedLanguage] = useState('');
   const toggleForm = (showForm, hideForm) => {
     setShowLoginForm(showForm === 'loginForm');
     setShowRegistrationForm(showForm === 'registrationForm');
@@ -35,7 +38,9 @@ function ResponsiveAppBar() {
     setShowLoginForm(false);
     setShowRegistrationForm(false);
   };
-
+  const handleLanguageChange = (event) => {
+    setSelectedLanguage(event.target.value);
+  };
   const handleOverlayClick = (e) => {
     // Check if the click target is not part of the form
     if (!e.target.closest('.form-container')) {
@@ -87,15 +92,19 @@ function ResponsiveAppBar() {
   };
 
   const handlePageClick = (page) => {
-    // Define the URLs corresponding to each page
+    
     const pageUrls = {
       Home: '/',
       Greenlight: '/greenlight',
-      Account: '/account',
-      Contact: '/contact',
+      Request: '/request',
+      Chat: '/chat',
+      Favorites: '/favorites', 
+      'My materials': '/mymaterials',
+      Rejects: '/rejects',
       Login: '/login',
       'Become a member': '/register',
-      // Add more pages and their URLs as needed
+
+     
     };
 
     // Navigate to the URL when a page button is clicked
@@ -108,9 +117,9 @@ function ResponsiveAppBar() {
         <Toolbar>
           <div style={{ width: '100%', paddingTop: 13, paddingBottom: 13, paddingRight: 27, justifyContent: 'flex-start', alignItems: 'center', display: 'inline-flex'}}>
           <div
-            style={{color: '#252B42', fontSize: 24, fontFamily: 'Montserrat', fontWeight: '700', letterSpacing: 0.10}}
+            style={{color: '#252B42', fontSize: 24, fontFamily: 'Montserrat', fontWeight: '700', letterSpacing: 0.10, whiteSpace:'nowrap'}}
           >
-            Bilim Source
+            <a href='/' style={{textDecoration:'none', color:'#252B42'}}>Bilim Source</a>
           </div>
           </div>
 
@@ -170,13 +179,13 @@ function ResponsiveAppBar() {
           >
             LOGO
           </Typography>
-          <div style={{justifyContent: 'center', alignItems: 'center', gap: 216, display: 'inline-flex'}}>
-          <Box style={{alignSelf: 'stretch', justifyContent: 'flex-start', alignItems: 'center', gap: 25, display: 'inline-flex'}}>
+          <div style={{ display: 'flex', justifyContent: 'spaceBetween'}}>
+          <Box style={{alignSelf: 'stretch', display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
             {pages1.map((page) => (
               <Button
                 key={page}
                 onClick={() => handlePageClick(page)}
-                sx={{ textTransform: "none", textAlign: 'center', color: '#737373', fontSize: 14, fontFamily: 'Montserrat', fontWeight: '600', letterSpacing: 0.20, wordWrap: 'break-word'}}
+                sx={{  marginRight:'10px', textTransform: "none", color: '#737373', fontSize: 16, fontFamily: 'Montserrat', fontWeight: '600', whiteSpace:'nowrap'}}
               >
                 {page}
               </Button>
@@ -186,31 +195,64 @@ function ResponsiveAppBar() {
           <Box style={{width: '100%',alignSelf: 'stretch', justifyContent: 'flex-start', alignItems: 'center', gap: 25, display: 'inline-flex'}}>
            
               <Button
+              
                 
                 onClick={() => toggleForm('loginForm', 'registrationForm')}
-                style={{textTransform: "none", width:'100%',color: '#23A6F0', fontSize: 14, fontFamily: 'Montserrat', fontWeight: '700', letterSpacing: 0.20, wordWrap: 'break-word'}}
+                style={{textTransform: "none", width:'100%',color: '#23A6F0', fontSize: 16, fontFamily: 'Montserrat', fontWeight: '700', letterSpacing: 0.20, wordWrap: 'break-word'}}
               >
                 Login
               </Button>
-              <div style={{width: '100%',paddingLeft: 25, paddingRight: 25, paddingTop: 15, paddingBottom: 15, background: '#23A6F0', borderRadius: 5, overflow: 'hidden', justifyContent: 'flex-start', alignItems: 'center', gap: 15, display: 'flex'}}>
-                <Button
-                
-                onClick={() => toggleForm('registrationForm', 'loginForm')}
-                style={{
-                  textTransform: "none",
-                  width: '100%',
-                  whiteSpace: 'nowrap', // Prevent text from wrapping to the next line
-                  color: 'white',
-                  fontSize: 14,
-                  fontFamily: 'Montserrat',
-                  fontWeight: '700',
-                  letterSpacing: 0.20,
-                }}>
-                Become a member
-              </Button>
-              </div>
+              <Button
+  variant="outlined"
+  onClick={() => toggleForm('registrationForm', 'loginForm')}
+  sx={{
+    textTransform: 'none',
+    whiteSpace: 'nowrap',
+    color: '#23A6F0',
+    fontSize: 16,
+    fontFamily: 'Montserrat',
+    fontWeight: 700,
+    letterSpacing: 0.2,
+    padding: '10px 50px', // Adjust the padding to make the button bigger
+    '&:hover': {
+      backgroundColor: '#23A6F0',
+      color: '#fff',
+    },
+  }}
+>
+  Register
+</Button>
+
               
-          </Box>        
+      <Select
+        autoWidth = "true"
+        id="language-select"
+        value={selectedLanguage}
+        onChange={handleLanguageChange}
+
+        size="small"
+        sx={{
+         
+          whiteSpace: 'nowrap',
+          color: '#23A6F0',
+          fontSize: 16,
+          fontFamily: 'Montserrat',
+          
+          letterSpacing: 0.2,
+          padding: '5px', // Adjust the padding to make the button bigger
+          
+        }}
+      >
+        <MenuItem value="kazakh">KZ</MenuItem>
+        <MenuItem value="russian">RU</MenuItem>
+        <MenuItem value="english">EN</MenuItem>
+      </Select>
+  </Box>
+    
+  
+   
+  
+           
           </div>
           
 
@@ -287,4 +329,4 @@ function ResponsiveAppBar() {
     </AppBar>
   );
 };
-export default ResponsiveAppBar;
+export default Header;

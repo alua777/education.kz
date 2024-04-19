@@ -1,0 +1,24 @@
+[{
+    "id": 1,
+    "subject": "Introduction to Algebra",
+    "theme": "John Smith",
+    "template": "Mathematics",
+    "grade": "8th Grade",
+    "language": "english"
+  },
+  {
+    "id": 2,
+    "subject": "Introduction to Algebra",
+    "theme": "John Smith",
+    "template": "Mathematics",
+    "grade": "8th Grade",
+    "language": "english"
+  },
+  {
+    "id": 1,
+    "subject": "Introduction to Algebra",
+    "theme": "John Smith",
+    "template": "Mathematics",
+    "grade": "8th Grade",
+    "language": "english"
+  }]
